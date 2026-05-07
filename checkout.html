@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Thành Luân</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body class="checkout-page">
+    <header class="checkout-header">
+        <div class="container checkout-header-inner">
+            <a href="index.html" class="checkout-logo">Thành Luân</a>
+            <a href="index.html" class="back-to-cart">
+                <i class="fa-solid fa-arrow-left"></i>
+                Tiếp tục mua hàng
+            </a>
+        </div>
+    </header>
+
+    <main class="container checkout-layout">
+        <section class="checkout-panel">
+            <div class="checkout-title-row">
+                <h1>Thông tin mua hàng</h1>
+                <a href="index.html" class="login-link">
+                    <i class="fa-regular fa-circle-user"></i>
+                    Đăng nhập
+                </a>
+            </div>
+
+            <form id="checkout-form" class="checkout-form">
+                <input type="email" name="email" placeholder="Email" required>
+                <input type="text" name="fullname" placeholder="Họ và tên" required>
+                <input type="tel" name="phone" placeholder="Số điện thoại" required>
+                <input type="text" name="address" placeholder="Địa chỉ" required>
+
+                <label class="checkout-checkbox">
+                    <input type="checkbox" name="otherAddress">
+                    <span>Giao hàng đến địa chỉ khác</span>
+                </label>
+
+                <textarea name="note" rows="4" placeholder="Ghi chú đơn hàng (tùy chọn)"></textarea>
+            </form>
+        </section>
+
+        <aside class="checkout-summary">
+            <h2>Đơn hàng của bạn</h2>
+            <div id="checkout-member" class="checkout-member"></div>
+            <div id="checkout-items" class="checkout-items"></div>
+
+            <div class="summary-lines">
+                <div>
+                    <span>Tạm tính</span>
+                    <strong id="checkout-subtotal">0 đ</strong>
+                </div>
+                <div id="checkout-discount-row">
+                    <span>Ưu đãi thành viên</span>
+                    <strong id="checkout-discount">-0 đ</strong>
+                </div>
+                <div>
+                    <span>Phí vận chuyển</span>
+                    <strong>Miễn phí</strong>
+                </div>
+                <div class="summary-total">
+                    <span>Tổng cộng</span>
+                    <strong id="checkout-total">0 đ</strong>
+                </div>
+            </div>
+
+            <div class="payment-box">
+                <h3>Phương thức thanh toán</h3>
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="cod" checked>
+                    <span>
+                        <strong>COD</strong>
+                        Chỉ thanh toán khi nhận hàng
+                    </span>
+                </label>
+
+                <div class="payment-detail payment-detail-active" data-payment-detail="cod">
+                    <p>Thanh toán bằng tiền mặt khi nhận hàng. Nhân viên giao hàng sẽ thu đúng số tiền trên đơn.</p>
+                </div>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="card">
+                    <span>
+                        <strong><i class="fa-brands fa-cc-visa"></i> Visa / <i class="fa-brands fa-cc-mastercard"></i> Mastercard</strong>
+                        Thanh toán bằng thẻ quốc tế
+                        <div class="payment-detail payment-detail-active" data-payment-detail="card">
+                            <p>Hiện đang bảo trì !</p>
+                        </div>
+                    </span>
+                </label>
+
+                <div class="payment-detail card-payment-fields" data-payment-detail="card">
+                    <input type="text" name="cardName" form="checkout-form" placeholder="Tên chủ thẻ">
+                    <input type="text" name="cardNumber" form="checkout-form" inputmode="numeric" maxlength="19" placeholder="Số thẻ">
+                    <div class="card-field-row">
+                        <input type="text" name="cardExpiry" form="checkout-form" inputmode="numeric" maxlength="5" placeholder="MM/YY">
+                        <input type="password" name="cardCvv" form="checkout-form" inputmode="numeric" maxlength="4" placeholder="CVV">
+                    </div>
+                </div>
+
+                <label class="payment-option">
+                    <input type="radio" name="payment" value="bank">
+                    <span>
+                        <strong><i class="fa-solid fa-building-columns"></i> Chuyển khoản ngân hàng</strong>
+                        VPBank - Ngân hàng Việt Nam Thịnh Vượng
+                    </span>
+                </label>
+
+                <div class="payment-detail bank-transfer-info" data-payment-detail="bank">
+                    <div class="bank-transfer-details">
+                        <p><span>Số tài khoản</span><strong>0984966321</strong></p>
+                        <p><span>Chủ tài khoản</span><strong>Nguyễn Thành Luân</strong></p>
+                        <p><span>Ngân hàng</span><strong>VPBank (Ngân hàng Thịnh Vượng)</strong></p>
+                    </div>
+                    <img src="../perfume-main/img/transfer_QR.jpg" alt="QR chuyển khoản VPBank Nguyễn Thành Luân">
+                </div>
+            </div>
+
+            <button type="submit" form="checkout-form" class="btn place-order-btn">Đặt hàng</button>
+        </aside>
+    </main>
+
+    <div id="order-status-overlay" class="order-status-overlay">
+        <div id="order-pending" class="order-status-box">
+            <div class="order-loader"></div>
+            <h3>Đang chờ xác nhận đơn hàng...</h3>
+            <p>Vui lòng chờ trong giây lát, hệ thống đang kiểm tra thông tin thanh toán và đơn hàng của bạn.</p>
+        </div>
+
+        <div id="order-success" class="order-status-box order-status-success">
+            <div class="order-success-icon"><i class="fa-solid fa-check"></i></div>
+            <h3>Đặt hàng thành công!</h3>
+            <p id="order-success-message">Cảm ơn bạn đã mua hàng tại Thành Luân.</p>
+            <button id="continue-shopping" class="btn" type="button">Tiếp tục mua sắm</button>
+        </div>
+    </div>
+
+    <script src="checkout.js"></script>
+</body>
+</html>

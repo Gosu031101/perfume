@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thành Luân - Nước Hoa Chính Hãng</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Font Awesome cho các icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container header-container">
+            <button class="menu-toggle" id="menu-toggle">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+            <div class="logo">
+                <h2>Thành Luân</h2>
+            </div>
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li class="has-dropdown">
+                        <a href="#" class="nav-link">Nước hoa <i class="fa-solid fa-caret-down" aria-hidden="true" style="margin-left:6px;font-size:0.9rem"></i></a>
+                        <ul class="dropdown">
+                            <li><a href="#" data-filter="nam">Nam</a></li>
+                            <li><a href="#" data-filter="nu">Nữ</a></li>
+                            <li><a href="#" data-filter="unisex">Unisex</a></li>
+                            <li><a href="#" data-filter="arab">Arab</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="#">Xịt body</a></li>
+                    <li><a href="#">Sáp lăn khử mùi</a></li>
+                    <li><a href="#">Nến</a></li>
+                </ul>
+            </nav>
+            <!-- Cập nhật lại phần header-actions -->
+    <div class="header-actions">
+    <div class="search-container">
+        <input type="text" id="search-input" placeholder="Tìm kiếm..." class="search-input">
+        <button id="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
+    </div>
+    <button class="cart-btn">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span id="cart-count" class="cart-count">0</span>
+    </button>
+    <div class="account-btn" id="account-btn" role="button" tabindex="0">
+        <i class="fa-solid fa-user"></i>
+        <span id="account-label">Đăng nhập</span>
+    </div>
+</div>
+
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+<!-- ... existing code ... -->
+
+    <!-- ĐÃ DỜI TOÀN BỘ POPUP XUỐNG ĐÂY (BÊN NGOÀI HEADER) ĐỂ FIX LỖI ĐÈ GIAO DIỆN -->
+    <div id="auth-overlay" class="auth-overlay"></div>
+    <div id="auth-modal" class="auth-modal">
+        <button id="close-auth" class="close-auth" type="button"><i class="fa-solid fa-xmark"></i></button>
+        <h2>Đăng nhập thành viên</h2>
+        <p class="auth-note">Nhập thông tin để tích điểm, lên hạng và nhận ưu đãi khi mua nước hoa.</p>
+        <div class="auth-tabs">
+            <button type="button" class="auth-tab active" data-auth-mode="login">Đăng nhập</button>
+            <button type="button" class="auth-tab" data-auth-mode="register">Đăng ký</button>
+        </div>
+        <form id="auth-form" class="auth-form">
+            <div id="auth-message" class="auth-message"></div>
+            <label class="auth-field">
+                <input type="text" id="auth-name" placeholder="Họ và tên" required>
+                <i class="fa-regular fa-user"></i>
+            </label>
+            <label class="auth-field">
+                <input type="email" id="auth-email" placeholder="Email" required>
+                <i class="fa-regular fa-envelope"></i>
+            </label>
+            <label class="auth-field">
+                <input type="password" id="auth-password" placeholder="Mật khẩu" required>
+                <i class="fa-regular fa-eye"></i>
+            </label>
+            <button type="submit" class="btn">Đăng nhập</button>
+        </form>
+        <div class="auth-divider"><span>Hoặc tiếp tục với</span></div>
+        <div class="auth-socials">
+            <button type="button" data-social-auth="google"><i class="fa-brands fa-google"></i> Google</button>
+            <button type="button" data-social-auth="facebook"><i class="fa-brands fa-facebook"></i> Facebook</button>
+        </div>
+        <div class="rank-rules">
+            <span>Đồng: 0 điểm - giảm 5%</span>
+            <span>Bạc: 500 điểm - giảm 8%</span>
+            <span>Vàng: 1000 điểm - giảm 10%</span>
+            <span>Bạch kim: 1500 điểm - giảm 15%</span>
+        </div>
+        <div id="member-rank-box" class="member-rank-box"></div>
+        <button id="logout-btn" class="logout-btn" type="button">Đăng xuất</button>
+    </div>
+
+<!-- GIỎ HÀNG SLIDE-OUT (CART DRAWER) -->
+    <div id="cart-overlay" class="cart-overlay"></div>
+    <div id="cart-drawer" class="cart-drawer">
+        <div class="cart-header">
+            <h2>Giỏ hàng của bạn</h2>
+            <button id="close-cart" class="close-cart"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+        
+        <!-- Nơi chứa các sản phẩm được thêm vào -->
+        <div class="cart-body" id="cart-items-container">
+            <!-- Render tự động qua JS -->
+        </div>
+        
+        <div class="cart-footer">
+            <div class="cart-total">
+                <span>Tổng cộng:</span>
+                <span id="cart-total-price">0 đ</span>
+            </div>
+            <p style="font-size: 0.8rem; color: #888; text-align: center; margin-bottom: 10px;">
+                Phí vận chuyển và thuế sẽ được tính khi thanh toán.
+            </p>
+            <button class="btn btn-checkout">Tiến hành thanh toán</button>
+        </div>
+    </div>
+
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Khám Phá Hương Thơm Của Riêng Bạn</h1>
+                <p>Hàng ngàn mẫu nước hoa chính hãng đang chờ đón bạn.</p>
+                <a href="#" class="btn">Mua sắm ngay</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Danh sách sản phẩm -->
+    <main class="container my-5">
+        <h2 class="section-title">Sản Phẩm Nổi Bật</h2>
+        <div class="product-grid">
+            <!-- Sản phẩm 1 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300" alt="Nước hoa 1">
+                <div class="product-info">
+                    <span class="brand">Dior</span>
+                    <h3>Sauvage Eau De Parfum</h3>
+                    <p class="price">2.850.000 ₫</p>
+                    <button class="btn-add-cart">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 2 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300" alt="Nước hoa 2">
+                <div class="product-info">
+                    <span class="brand">Chanel</span>
+                    <h3>Bleu De Chanel</h3>
+                    <p class="price">3.200.000 ₫</p>
+                    <button class="btn-add-cart">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 3 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300" alt="Nước hoa 3">
+                <div class="product-info">
+                    <span class="brand">Tom Ford</span>
+                    <h3>Oud Wood</h3>
+                    <p class="price">5.500.000 ₫</p>
+                    <button class="btn-add-cart">Thêm vào giỏ</button>
+                </div>
+            </div>
+            <!-- Sản phẩm 4 -->
+            <div class="product-card">
+                <img src="https://via.placeholder.com/300x300" alt="Nước hoa 4">
+                <div class="product-info">
+                    <span class="brand">YSL</span>
+                    <h3>Y Eau De Parfum</h3>
+                    <p class="price">2.600.000 ₫</p>
+                    <button class="btn-add-cart">Thêm vào giỏ</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container text-center">
+            <p>&copy; 2026 Thành Luân..</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
